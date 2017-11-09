@@ -1,0 +1,39 @@
+---
+  - name: "synapse1"
+    signals:
+      - order: "κανε μου μια ερωτηση"
+    neurons:
+      - say:
+          message: "σου αρεσουν οι τηγανιτες ?"
+      - neurotransmitter:
+          from_answer_link:
+            - synapse: "synapse2"
+              answers:
+                - "εννοειτε !"
+                - "βεβαιως"
+            - synapse: "synapse3"
+              answers:
+                - "δεν μου αρεσουν"
+          default: "synapse4"
+
+  - name: "synapse2"
+    signals:
+      - order: "synapse2"
+    neurons:
+      - say:
+          message: "και εμενα μου αρεσουν!"
+
+
+  - name: "synapse3"
+    signals:
+      - order: "synapse3"
+    neurons:
+      - say:
+          message: "καταλαβα δεν σου αρεσουν."
+
+  - name: "synapse4"
+    signals:
+      - order: "synapse4"
+    neurons:
+      - say:
+          message: "δεν καταλαβα την ερωτηση !"
