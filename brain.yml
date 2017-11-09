@@ -1,0 +1,87 @@
+---
+ # - includes:
+      # - brain/say_el.yml
+      #   - brain/systemdate.yml
+      #  - brain/neurotransmitter.yml
+      #  - brain/uri.yml
+
+  - name: "synapse1"
+    signals:
+      - order: "Κάνε μου μία ερώτηση"
+    neurons:
+      - say:
+          message: "σε ποιό ερευνητικό έργο δουλεύεις τώρα"
+      - neurotransmitter:
+          from_answer_link:
+            - synapse: "synapse2"
+              answers:
+                - "στο έργο"
+            - synapse: "synapse3"
+              answers:
+                - "δεν δουλεύω"
+          default: "synapse4"
+
+  - name: "synapse2"
+    signals:
+      - order: "synapse2"
+    neurons:
+      - say:
+          message: "ώώ ναι, το γνωρίζω το έργο γιατί σε αυτό προταγωνιστής, είναι ο φίλος μου"
+
+  - name: "synapse3"
+    signals:
+      - order: "synapse3"
+    neurons:
+      - say:
+          message: "δεν πειράζει. Θα πάρετε κάποιο έργο και θα δουλέψεις."
+
+  - name: "synapse4"
+    signals:
+      - order: "synapse4"
+    neurons:
+      - say:
+          message: "δεν κατάλαβα την ερώτηση"  
+
+  - name: "say-hello"
+    signals:
+      - order: "Γεια σου τι κάνεις"
+    neurons:
+      - say:
+          message:
+            - "Γεια {{name}} καλά είμαι"
+
+
+  - name: "my-app"
+    signals:
+      - order: "Μίλησέ μας για τον εαυτό σου"
+    neurons:
+      - say:
+          message:
+            - "Είμαι η Αλεξάνδρα και είμαι μια μηχανή τεχνητής νοημοσύνης."
+
+  - name: "my-app2"
+    signals:
+      - order: "που βασίζεται η τεχνολογία σου"
+    neurons:
+      - say:
+          message:
+            - "Η τεχνολογία μου μεταξύ άλλων, βασίζεται στις λογικές συνάψεις μεταξύ ερωτήσεων και απαντήσεων."
+
+  - name: "stop-alexandra"
+    signals:
+      - order: "σε αφήνω"
+    neurons:
+      - say:
+          message: "γειά σου! για ότι χρειαστείς μίλα μου!"
+      - kill_switch
+
+  - name: "default-synapse"
+    signals:
+      - order: "default-synapse"
+    neurons:
+      - say:
+          message:
+            - "Δεν κατάλαβα"
+            - "δεν ξέρω αυτή την εντολή"
+            - "Παρακαλώ ξαναπέστε την εντολή"
+            - "δεν αναγνωρίζω αυτή την εντολή"
